@@ -7,9 +7,21 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h3>Welcome Juan X. Dela Cruz</h3>
+                <h3>Welcome <?= session()->get('userdata'); ?></h3>
+
         <a class="btn btn-warning btn-sm mb-3" href="<?= base_url(); ?>">Menu</a>
         <h2 class="mb-3">Student List</h2>
+
+        <?php if(session()->getFlashdata('success')): ?>
+            <div class="alert alert-success">
+                <?= session()->getFlashdata('success'); ?>
+            </div>
+<?php endif; ?>
+<?php if(session()->getFlashdata('error')): ?>
+            <div class="alert alert-danger">
+                <?= session()->getFlashdata('error'); ?>
+            </div>
+<?php endif; ?>
         
         <table class="table table-bordered text-center align-middle">
             <thead class="table-dark">
@@ -25,7 +37,6 @@
             <tbody>
 
 <?Php $no = 1; foreach($studentdata as $student): ?>
-
                 <tr>
                     <td><?= $no++ ?></td>
                     <td><?= $student->lastname; ?></td>
@@ -34,13 +45,12 @@
                     <td><?= $student->dateentry; ?></td>
                     <td>
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-warning btn-sm me-2">Edit</button>
-                            <button class="btn btn-danger btn-sm">Delete</button>
+                               <a href="student/edit?id=<?= md5($student->student_id . 'edit'); ?>" class="btn btn-warning btn-sm me-2">Edit</a>
+                            <a href="student/delete?id=<?= md5($student->student_id . 'delete'); ?>" class="btn btn-danger btn-sm">Delete</a>
                         </div>
                     </td>
                 </tr>
 <?Php endforeach; ?>
-
             </tbody>
         </table>
         

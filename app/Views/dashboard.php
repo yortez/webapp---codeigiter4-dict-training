@@ -16,7 +16,7 @@
             <a href="student" class="nav-link text-white d-flex align-items-center">
                 <span class="me-2">🎓</span> Student Management
             </a>
-            <a href="#" class="nav-link text-white d-flex align-items-center">
+            <a href="logout" class="nav-link text-white d-flex align-items-center">
                 <span class="me-2">🔒</span> Logout
             </a>
         </div>

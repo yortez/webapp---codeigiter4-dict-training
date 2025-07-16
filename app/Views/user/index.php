@@ -1,16 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+<?= $this->extend('user/layout') ?>
+<?= $this->section('content_area') ?>
+
     <div class="container mt-5">
-        <h3>Welcome Juan X. Dela Cruz</h3>
+        <h3>Welcome <?= session()->get('userdata'); ?></h3>
+
         <a class="btn btn-warning btn-sm mb-3" href="<?= base_url(); ?>">Menu</a>
         <h2 class="mb-3">User List</h2>
         
+<?php if(session()->getFlashdata('success')): ?>
+            <div class="alert alert-success">
+                <?= session()->getFlashdata('success'); ?>
+            </div>
+<?php endif; ?>
+<?php if(session()->getFlashdata('error')): ?>
+            <div class="alert alert-danger">
+                <?= session()->getFlashdata('error'); ?>
+            </div>
+<?php endif; ?>
+
         <table class="table table-bordered text-center align-middle">
             <thead class="table-dark">
                 <tr>
@@ -36,8 +43,8 @@
                     <td><?= $user->dateentry; ?></td>
                     <td>
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-warning btn-sm me-2">Edit</button>
-                            <button class="btn btn-danger btn-sm">Delete</button>
+                            <a href="user/edit?id=<?= md5($user->user_id . 'edit'); ?>" class="btn btn-warning btn-sm me-2">Edit</a>
+                            <a href="user/delete?id=<?= md5($user->user_id . 'delete'); ?>" class="btn btn-danger btn-sm">Delete</a>
                         </div>
                     </td>
                 </tr>
@@ -50,8 +57,5 @@
         <div class="text-end">
             <a class="btn btn-primary" href="user/add">Add New User</a>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        <?= $this->endSection(); ?>
